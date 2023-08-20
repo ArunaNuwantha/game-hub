@@ -9,13 +9,13 @@ export interface Platform {
   slug: string;
 }
 
-const apiClient = new APIClient<Platform>("/platforms/list/parents")
+const apiClient = new APIClient<Platform>("/platforms/list/parent")
 
 const usePlatforms = () => {
   return useQuery<FetchResponse<Platform>, Error>({
     queryKey: CACHE_PLATFORMS_KEY,
     queryFn: apiClient.getAll,
-    initialData: { count: platforms.length, results: platforms }
+    initialData: { count: platforms.length, results: platforms, next: null }
   })
 };
 
